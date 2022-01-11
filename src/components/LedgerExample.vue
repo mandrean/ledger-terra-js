@@ -58,7 +58,7 @@ export default {
   data() {
     return {
       deviceLog: [],
-      transportChoice: "WebUSB",
+      transportChoice: "U2F",
     };
   },
   computed: {
@@ -87,7 +87,9 @@ export default {
 
       if (this.transportChoice === "U2F") {
         try {
-          transport = await TransportU2F.create(10000);
+          transport = await TransportU2F.create();
+          transport.setScrambleKey("terra");
+          console.log(transport)
         } catch (e) {
           this.log(e);
         }
